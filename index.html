@@ -2,6 +2,18 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <!-- GitHub Pages: /user/repo 형태로 열리면 ./ 번들 경로가 깨지므로 디렉터리 URL로 통일 -->
+    <script>
+      (function () {
+        var p = location.pathname
+        if (p.length > 1 && !p.endsWith('/')) {
+          var last = p.slice(p.lastIndexOf('/') + 1)
+          if (last.indexOf('.') === -1) {
+            location.replace(p + '/' + location.search + location.hash)
+          }
+        }
+      })()
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>채팅</title>
@@ -9,5 +21,25 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener(
+        'error',
+        function (e) {
+          var t = e.target
+          if (!t || t === window || !t.tagName) return
+          var name = t.tagName
+          if (name !== 'SCRIPT' && name !== 'LINK') return
+          var src = t.src || t.href
+          if (!src) return
+          var root = document.getElementById('root')
+          if (!root || root.querySelector('[data-boot-error]')) return
+          root.innerHTML =
+            '<p data-boot-error style="padding:1rem;font-family:system-ui,sans-serif;line-height:1.5">번들을 불러오지 못했습니다. 배포가 dist 내용인지, 주소 끝에 / 가 있는지 확인하세요.<br /><code style="word-break:break-all">' +
+            src +
+            '</code></p>'
+        },
+        true,
+      )
+    </script>
   </body>
 </html>
