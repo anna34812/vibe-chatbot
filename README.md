@@ -18,6 +18,22 @@ npm install
 npm run dev
 ```
 
+## GitHub Pages (`username.github.io` 저장소)
+
+저장소 **루트**를 그대로 올리면 `index.html`이 `/src/main.tsx`를 가리켜 **사이트가 뜨지 않습니다.** 아래 둘 중 하나만 쓰면 됩니다.
+
+### A. GitHub Actions로 배포 (권장)
+
+저장소 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 두고, `.github/workflows/pages.yml`이 성공하도록 푸시합니다. (빌드 결과는 `dist`를 artifact로만 쓰고, 루트 소스와 섞이지 않습니다.)
+
+### B. “Deploy from a branch”만 쓰는 경우
+
+1. 로컬에서 `npm run build:docs` 실행 → **`docs/`** 폴더에 정적 파일이 생성됩니다.
+2. **`docs/` 변경분을 커밋·푸시**합니다.
+3. **Settings → Pages**에서 Branch는 **main**(또는 기본 브랜치), 폴더는 **`/docs`** 를 선택합니다. (루트 `/`가 아닙니다.)
+
+코드를 수정한 뒤에는 다시 `npm run build:docs` 후 커밋해야 합니다.
+
 ## CORS
 
 로컬(`npm run dev`)에서는 Vite가 `/n8n-webhook`으로 들어온 요청을 `VITE_N8N_WEBHOOK_URL` 호스트로 넘겨 주므로, 브라우저 입장에서는 같은 출처로만 통신해 **Failed to fetch(CORS)** 를 피할 수 있습니다.

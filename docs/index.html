@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- GitHub Pages: /user/repo 형태로 열리면 ./ 번들 경로가 깨지므로 디렉터리 URL로 통일 -->
+    <script>
+      (function () {
+        var p = location.pathname
+        if (p.length > 1 && !p.endsWith('/')) {
+          var last = p.slice(p.lastIndexOf('/') + 1)
+          if (last.indexOf('.') === -1) {
+            location.replace(p + '/' + location.search + location.hash)
+          }
+        }
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>채팅</title>
+    <script type="module" crossorigin src="./assets/index-X3w6HO7O.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-dnHYdcm5.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener(
+        'error',
+        function (e) {
+          var t = e.target
+          if (!t || t === window || !t.tagName) return
+          var name = t.tagName
+          if (name !== 'SCRIPT' && name !== 'LINK') return
+          var src = t.src || t.href
+          if (!src) return
+          var root = document.getElementById('root')
+          if (!root || root.querySelector('[data-boot-error]')) return
+          var isDevEntry = /\/src\/main\.tsx($|\?)/.test(src)
+          root.innerHTML = isDevEntry
+            ? '<p data-boot-error style="padding:1rem;font-family:system-ui,sans-serif;line-height:1.55;max-width:40rem">지금 올라간 것은 <strong>빌드 전 소스</strong>입니다. GitHub Pages에는 <code>npm run build</code>로 만든 <strong>dist 폴더 안 파일만</strong> 배포해야 합니다.<br /><br />방법: 저장소 Settings → Pages → Build and deployment에서 Source를 <strong>GitHub Actions</strong>로 하고, 이 저장소의 워크플로가 돌아가게 하거나, 로컬에서 빌드한 뒤 <code>dist</code> 내용을 사이트에 올리는 브랜치·폴더에 넣으세요.<br /><br /><code style="word-break:break-all;opacity:.85">' +
+              src +
+              '</code></p>'
+            : '<p data-boot-error style="padding:1rem;font-family:system-ui,sans-serif;line-height:1.5">번들을 불러오지 못했습니다. 배포가 dist 내용인지, 주소 끝에 / 가 있는지 확인하세요.<br /><code style="word-break:break-all">' +
+              src +
+              '</code></p>'
+        },
+        true,
+      )
+    </script>
+  </body>
+</html>
